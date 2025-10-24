@@ -1,63 +1,64 @@
-import { useState } from "react"
-import { Upload as UploadIcon, File, CheckCircle, AlertCircle, Sparkles } from "lucide-react"
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Upload as UploadIcon, File, CheckCircle, AlertCircle, Sparkles } from "lucide-react";
 
 export default function Upload() {
-  const [file, setFile] = useState(null)
-  const [projectName, setProjectName] = useState("")
-  const [description, setDescription] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState("")
-  const [dragActive, setDragActive] = useState(false)
-
-  const handleDrag = (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true)
-    } else if (e.type === "dragleave") {
-      setDragActive(false)
-    }
-  }
-
-  const handleDrop = (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    setDragActive(false)
-
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      setFile(e.dataTransfer.files[0])
-    }
-  }
+  const [projectName, setProjectName] = useState("");
+  const [description, setDescription] = useState("");
+  const [files, setFiles] = useState([]);
+  const [dragActive, setDragActive] = useState(false);
+  const [loading, setLoading] = useState("");
+  const [message, setMessage] = useState("");
+  const [uploadMode, setUploadMode] = useState("files"); // 'files' or 'folder'
 
   const handleFileChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0])
+    setFiles(Array.from(e.target.files));
+  };
+  
+  const handleDrag = (e) =>{
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(e.type === "dragenter" || e.type === "dragover");
+  };
+
+  const handleDrop = (e) =>{
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+    if(e.dataTransfer.files && e.dataTransfer.files.length > 0){
+      setFiles(Array.from(e.dataTransfer.files));
     }
   }
 
   const handleUpload = async (e) => {
-    e.preventDefault()
-
-    if (!file || !projectName) {
-      setMessage("error:Please provide a project name and select a file")
-      return
+    e.preventDefault();
+    if (!projectName || files.length === 0) {
+      setMessage("error: Project name and files required");
+      return;
     }
-
-    setLoading(true)
-    setMessage("")
-
-    // Simulate upload
-    setTimeout(() => {
-      setLoading(false)
-      setMessage("success:Project uploaded successfully! AI analysis in progress...")
-      setTimeout(() => {
-        setMessage("")
-        setFile(null)
-        setProjectName("")
-        setDescription("")
-      }, 3000)
-    }, 2000)
-  }
+    setLoading(true);
+    setMessage("");
+    try {
+      const formData = new FormData();
+      formData.append("projectName", projectName);
+      formData.append("description", description);
+      files.forEach(file => formData.append("files", file));
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+      if (res.ok) {
+        setMessage("success: Upload complete!");
+        // Navigate to dashboard or project detail after success
+        navigate("/dashboard");
+      } else {
+        setMessage("error: Upload failed");
+      }
+    } catch {
+      setMessage("error: Network error");
+    }
+    setLoading(false);
+  };
 
   return (
     <div className="min-h-screen bg-black text-white pt-24 pb-16 px-4 sm:px-6 lg:px-8">
@@ -65,8 +66,13 @@ export default function Upload() {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/50 bg-white/10 mb-6 animate-glow">
-            <Sparkles className="w-4 h-4 text-white" />
-            <span className="text-sm font-medium text-white">AI-Powered Analysis</span>
+            <div className="relative">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-ping absolute"></div>
+              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+            </div>
+            <span className="text-sm font-medium text-white">
+              AI-POWERED ANALYSIS
+            </span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
             Upload Your Legacy Project
@@ -85,28 +91,28 @@ export default function Upload() {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Project Name *
+                  Project Name 
                 </label>
                 <input
                   type="text"
                   value={projectName}
                   onChange={(e) => setProjectName(e.target.value)}
                   className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-                  placeholder="e.g., My Legacy App"
-                  required
+                  placeholder="My-Legacy-App"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Description (Optional)
+                  Description 
                 </label>
-                <textarea
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors resize-none"
+                <input 
+                type = "text"
+                value = {description}
+                onChange={(e)=> setDescription(e.target.value)}
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
                   placeholder="Brief description of your project..."
-                  rows="3"
+                  
                 />
               </div>
             </div>
@@ -115,6 +121,32 @@ export default function Upload() {
           {/* File Upload */}
           <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8">
             <h2 className="text-xl font-semibold mb-6 text-white">Upload Files</h2>
+
+            {/* Mode Toggle */}
+            <div className="flex justify-center gap-4 mb-6">
+              <button
+                type="button"
+                onClick={() => setUploadMode("files")}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  uploadMode === "files"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                }`}
+              >
+                Select Files
+              </button>
+              <button
+                type="button"
+                onClick={() => setUploadMode("folder")}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  uploadMode === "folder"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                }`}
+              >
+                Select Folder
+              </button>
+            </div>
 
             <div
               onDragEnter={handleDrag}
@@ -127,23 +159,36 @@ export default function Upload() {
                   : "border-gray-700 hover:border-gray-600"
               }`}
             >
-              {file ? (
+              {files.length > 0 ? (
                 <div className="flex flex-col items-center gap-4">
                   <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center">
                     <File className="w-8 h-8 text-green-400" />
                   </div>
-                  <div>
-                    <p className="text-white font-medium">{file.name}</p>
-                    <p className="text-gray-400 text-sm">
-                      {(file.size / 1024 / 1024).toFixed(2)} MB
-                    </p>
+                  <div className="w-full">
+                    {files.map((file, index) => (
+                      <div key={index} className="flex justify-between items-center bg-gray-800 p-2 rounded mb-2">
+                        <div>
+                          <p className="text-white font-medium">{file.name}</p>
+                          <p className="text-gray-400 text-sm">
+                            {(file.size / 1024 / 1024).toFixed(2)} MB
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setFiles(files.filter((_, i) => i !== index))}
+                          className="text-red-400 hover:text-red-300"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
                   </div>
                   <button
                     type="button"
-                    onClick={() => setFile(null)}
+                    onClick={() => setFiles([])}
                     className="text-sm text-red-400 hover:text-red-300 transition-colors"
                   >
-                    Remove file
+                    Remove all files
                   </button>
                 </div>
               ) : (
@@ -152,11 +197,13 @@ export default function Upload() {
                     <UploadIcon className="w-8 h-8 text-gray-400" />
                   </div>
                   <p className="text-white font-medium mb-2">
-                    Drop your files here, or{" "}
+                    Drag & Drop your {uploadMode === "files" ? "files" : "folder"} here, or{" "}
                     <label className="text-white underline hover:text-gray-300 cursor-pointer transition-colors">
                       browse
                       <input
                         type="file"
+                        multiple={uploadMode === "files"}
+                        webkitdirectory={uploadMode === "folder"}
                         onChange={handleFileChange}
                         className="hidden"
                         accept=".js,.jsx,.ts,.tsx,.py,.java,.zip,.tar,.gz"
@@ -174,7 +221,7 @@ export default function Upload() {
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={loading || !file || !projectName}
+            disabled={loading || files.length === 0 || !projectName}
             className="w-full py-4 bg-white hover:bg-gray-200 text-black rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 group"
           >
             {loading ? (
@@ -232,5 +279,5 @@ export default function Upload() {
         </div>
       </div>
     </div>
-  )
+  );
 }
