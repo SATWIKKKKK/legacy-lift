@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Upload as UploadIcon, File, CheckCircle, AlertCircle, Sparkles } from "lucide-react";
+import GlowingCard from "../components/ui/glowing-card";
 
 export default function Upload() {
+  const navigate = useNavigate();
   const [projectName, setProjectName] = useState("");
   const [description, setDescription] = useState("");
   const [files, setFiles] = useState([]);
@@ -18,7 +20,11 @@ export default function Upload() {
   const handleDrag = (e) =>{
     e.preventDefault();
     e.stopPropagation();
-    setDragActive(e.type === "dragenter" || e.type === "dragover");
+   if(e.type === "dragenter" || e.type === "dragover"){
+    setDragActive(true);
+   } else if(e.type === "dragleave"){
+    setDragActive(false);
+   }
   };
 
   const handleDrop = (e) =>{
@@ -65,15 +71,17 @@ export default function Upload() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/50 bg-white/10 mb-6 animate-glow">
-            <div className="relative">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-ping absolute"></div>
-              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+          <GlowingCard className="inline-block mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/50 bg-white/10">
+              <div className="relative">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-ping absolute"></div>
+                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+              </div>
+              <span className="text-sm font-medium text-white">
+                AI-POWERED ANALYSIS
+              </span>
             </div>
-            <span className="text-sm font-medium text-white">
-              AI-POWERED ANALYSIS
-            </span>
-          </div>
+          </GlowingCard>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
             Upload Your Legacy Project
           </h1>
@@ -148,17 +156,18 @@ export default function Upload() {
               </button>
             </div>
 
-            <div
-              onDragEnter={handleDrag}
-              onDragLeave={handleDrag}
-              onDragOver={handleDrag}
-              onDrop={handleDrop}
-              className={`border-2 border-dashed rounded-xl p-12 text-center transition-all ${
-                dragActive
-                  ? "border-blue-500 bg-blue-500/10"
-                  : "border-gray-700 hover:border-gray-600"
-              }`}
-            >
+            <GlowingCard className={`transition-all ${dragActive ? "opacity-100" : ""}`}>
+              <div
+                onDragEnter={handleDrag}
+                onDragLeave={handleDrag}
+                onDragOver={handleDrag}
+                onDrop={handleDrop}
+                className={`border-2 border-dashed rounded-xl p-12 text-center transition-all ${
+                  dragActive
+                    ? "border-blue-500 bg-blue-500/10"
+                    : "border-gray-700 hover:border-gray-600"
+                }`}
+              >
               {files.length > 0 ? (
                 <div className="flex flex-col items-center gap-4">
                   <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center">
@@ -201,12 +210,13 @@ export default function Upload() {
                     <label className="text-white underline hover:text-gray-300 cursor-pointer transition-colors">
                       browse
                       <input
+                        key={uploadMode} // Reset input when mode changes
                         type="file"
                         multiple={uploadMode === "files"}
                         webkitdirectory={uploadMode === "folder"}
                         onChange={handleFileChange}
                         className="hidden"
-                        accept=".js,.jsx,.ts,.tsx,.py,.java,.zip,.tar,.gz"
+                        accept={uploadMode === "folder" ? "" : ".js,.jsx,.ts,.tsx,.py,.java,.zip,.tar,.gz"}
                       />
                     </label>
                   </p>
@@ -215,15 +225,17 @@ export default function Upload() {
                   </p>
                 </>
               )}
-            </div>
+              </div>
+            </GlowingCard>
           </div>
 
           {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={loading || files.length === 0 || !projectName}
-            className="w-full py-4 bg-white hover:bg-gray-200 text-black rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 group"
-          >
+          <GlowingCard className="relative">
+            <button
+              type="submit"
+              disabled={loading || files.length === 0 || !projectName}
+              className="w-full py-4 bg-white hover:bg-gray-200 text-black rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 group relative z-10"
+            >
             {loading ? (
               <>
                 <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
@@ -235,7 +247,8 @@ export default function Upload() {
                 Start AI Analysis
               </>
             )}
-          </button>
+            </button>
+          </GlowingCard>
 
           {/* Message */}
           {message && (

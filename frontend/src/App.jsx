@@ -7,6 +7,7 @@ import ProjectDetail from "./pages/ProjectDetail"
 import Upload from "./pages/Upload"
 import DiffViewer from "./pages/DiffViewer"
 import Login from "./pages/Login"
+import GlowingDemo from "./pages/GlowingDemo"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import "./App.css"
@@ -21,6 +22,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/projects" element={<Dashboard />} />
           <Route path="/upload" element={<Upload />} />
+          <Route path="/demo" element={<GlowingDemo />} />
           <Route path="/project/:projectId" element={<ProjectDetail />} />
           <Route path="/project/:projectId/version/:versionId" element={<DiffViewer />} />
           <Route path="/login" element={<Login setIsAuthenticated={() => {}} />} />
