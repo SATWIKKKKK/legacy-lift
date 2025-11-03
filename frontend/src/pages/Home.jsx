@@ -1,12 +1,18 @@
 import { useNavigate } from "react-router-dom"
 import { ArrowRight, Github, GitCompare, History, Sparkles, Shield, Zap, Plus } from "lucide-react"
 import { GlowingEffect } from "../components/ui/glowing-effect"
+import { WebGLShader } from "../components/ui/web-gl-shader"
 
 export default function Home() {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="relative min-h-screen bg-black text-white overflow-hidden">
+      {/* WebGL Animated Background */}
+      <WebGLShader />
+      
+      {/* All content on top of WebGL background */}
+      <div className="relative z-10">
       {/* Hero Section */}
       <section className="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
@@ -260,6 +266,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </div>
     </div>
   )
 }
