@@ -73,23 +73,56 @@ export default function Home() {
       <section className="py-16 px-4 sm:px-6 lg:px-8 border-y border-gray-800">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700">
-              <div className="text-5xl font-bold text-white mb-2">
-                300+
+            
+            <div className="relative rounded-2xl">
+              <GlowingEffect
+                spread={80}
+                glow={true}
+                disabled={false}
+                proximity={84}
+                inactiveZone={0.01}
+                borderWidth={3}
+              />
+              <div className="relative text-center p-8 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700">
+                <div className="text-5xl font-bold text-white mb-2">
+                  300+
+                </div>
+                <div className="text-gray-400 font-medium">Projects Modernized</div>
               </div>
-              <div className="text-gray-400 font-medium">Projects Modernized</div>
             </div>
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700">
-              <div className="text-5xl font-bold text-white mb-2">
-                98%
+
+            <div className="relative rounded-2xl">
+              <GlowingEffect
+                spread={80}
+                glow={true}
+                disabled={false}
+                proximity={84}
+                inactiveZone={0.01}
+                borderWidth={3}
+              />
+              <div className="relative text-center p-8 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700">
+                <div className="text-5xl font-bold text-white mb-2">
+                  98%
+                </div>
+                <div className="text-gray-400 font-medium">Accuracy Rate</div>
               </div>
-              <div className="text-gray-400 font-medium">Accuracy Rate</div>
             </div>
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700">
-              <div className="text-5xl font-bold text-white mb-2">
-                50K+
+
+            <div className="relative rounded-2xl">
+              <GlowingEffect
+                spread={80}
+                glow={true}
+                disabled={false}
+                proximity={84}
+                inactiveZone={0.01}
+                borderWidth={3}
+              />
+              <div className="relative text-center p-8 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700">
+                <div className="text-5xl font-bold text-white mb-2">
+                  50K+
+                </div>
+                <div className="text-gray-400 font-medium">Lines Refactored</div>
               </div>
-              <div className="text-gray-400 font-medium">Lines Refactored</div>
             </div>
           </div>
         </div>
