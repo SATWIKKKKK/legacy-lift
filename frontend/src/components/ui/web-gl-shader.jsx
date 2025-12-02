@@ -60,7 +60,7 @@ export function WebGLShader() {
 
       refs.uniforms = {
         resolution: { value: [window.innerWidth, window.innerHeight] },
-        time: { value: 0.4 },
+        time: { value: 0.9 },
         xScale: { value: 1.0 },
         yScale: { value: 0.4 },
         distortion: { value: 0.04 },

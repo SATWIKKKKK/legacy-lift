@@ -1,32 +1,34 @@
 import { useNavigate } from "react-router-dom"
 import { ArrowRight, Github, GitCompare, History, Sparkles, Shield, Zap, Plus } from "lucide-react"
 import { GlowingEffect } from "../components/ui/glowing-effect"
+import { TestimonialsSection } from "../components/ui/testimonials-with-marquee"
+import { Pricing } from "../components/ui/pricing"
 import { WebGLShader } from "../components/ui/web-gl-shader"
 
 export default function Home() {
   const navigate = useNavigate()
 
   return (
-    <div className="relative min-h-screen bg-black text-white overflow-hidden">
-      {/* WebGL Animated Background */}
+    <div className="min-h-screen bg-black text-white relative">
+      {/* WebGL Shader Background */}
       <WebGLShader />
       
-      {/* All content on top of WebGL background */}
+      {/* Content Overlay */}
       <div className="relative z-10">
       {/* Hero Section */}
-      <section className="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
+      <section className="pt-32 pb-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
           {/* AI Badge */}
-          <div className="relative inline-block rounded-full">
+          <div className="relative inline-block rounded-full mb-8">
             <GlowingEffect
-              spread={60}
+              spread={80}
               glow={true}
               disabled={false}
-              proximity={80}
+              proximity={84}
               inactiveZone={0.01}
               borderWidth={2}
             />
-            <div className="relative inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/50 bg-white/10 mb-8">
+            <div className="relative inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/50 bg-white/10">
               <div className="relative">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-ping absolute"></div>
                 <div className="w-2 h-2 bg-green-400 rounded-full"></div>
@@ -38,8 +40,8 @@ export default function Home() {
           </div>
 
           {/* Main Heading */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans font-semibold mb-6  text-white tracking-tight text-center
-          uppercase max-w-full  ">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-sans font-bold mb-6  text-white tracking-normal text-center
+           max-w-full  ">
             One Stop Solution For
             <br />
             Legacy Code Refactor
@@ -267,6 +269,131 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Testimonials Section */}
+      <TestimonialsSection
+        title="Trusted by developers worldwide"
+        description="Join thousands of developers who are already building the future with our AI platform"
+        testimonials={[
+          {
+            author: {
+              name: "Emma Thompson",
+              handle: "@emmadev",
+              avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
+            },
+            text: "LegacyLift transformed our 10-year-old codebase into modern, maintainable code. The AI-powered refactoring saved us months of work.",
+            href: "https://twitter.com/emmadev"
+          },
+          {
+            author: {
+              name: "David Park",
+              handle: "@davidtech",
+              avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+            },
+            text: "The GitHub integration is seamless. We've reduced our technical debt by 60% since implementing LegacyLift in our workflow.",
+            href: "https://twitter.com/davidtech"
+          },
+          {
+            author: {
+              name: "Sofia Rodriguez",
+              handle: "@sofiaml",
+              avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
+            },
+            text: "Finally, a tool that understands code context! The accuracy in refactoring suggestions is impressive and saves hours of manual review."
+          },
+          {
+            author: {
+              name: "Michael Chen",
+              handle: "@mchen",
+              avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face"
+            },
+            text: "Best decision for our team. The diff viewer makes code review so much easier, and the AI suggestions are spot-on every time."
+          },
+          {
+            author: {
+              name: "Sarah Williams",
+              handle: "@sarahwill",
+              avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+            },
+            text: "We migrated our entire React codebase with LegacyLift. The automated refactoring maintained all functionality while improving code quality."
+          },
+          {
+            author: {
+              name: "James Anderson",
+              handle: "@jamesand",
+              avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
+            },
+            text: "Security-focused refactoring is a game-changer. LegacyLift identified and fixed vulnerabilities we didn't even know existed."
+          }
+        ]}
+      />
+
+      {/* Pricing Section */}
+      <Pricing
+        title="Simple, Transparent Pricing"
+        description="Choose the plan that works for you. All plans include access to our platform, AI-powered refactoring, and dedicated support."
+        plans={[
+          {
+            name: "STARTER",
+            price: "49",
+            yearlyPrice: "39",
+            period: "per month",
+            features: [
+              "Up to 10 projects",
+              "Basic AI refactoring",
+              "GitHub integration",
+              "Side-by-side diff viewer",
+              "48-hour support response",
+              "Community support",
+            ],
+            description: "Perfect for individual developers and small projects",
+            buttonText: "Start Free Trial",
+            href: "/upload",
+            isPopular: false,
+          },
+          {
+            name: "PROFESSIONAL",
+            price: "99",
+            yearlyPrice: "79",
+            period: "per month",
+            features: [
+              "Unlimited projects",
+              "Advanced AI refactoring",
+              "Priority GitHub integration",
+              "Version history tracking",
+              "24-hour support response",
+              "Team collaboration (up to 5)",
+              "Custom refactoring rules",
+              "Security vulnerability detection",
+            ],
+            description: "Ideal for growing teams and professional developers",
+            buttonText: "Get Started",
+            href: "/upload",
+            isPopular: true,
+          },
+          {
+            name: "ENTERPRISE",
+            price: "299",
+            yearlyPrice: "239",
+            period: "per month",
+            features: [
+              "Everything in Professional",
+              "Unlimited team members",
+              "Custom AI model training",
+              "Dedicated account manager",
+              "1-hour support response time",
+              "SSO Authentication",
+              "Advanced security & compliance",
+              "Custom SLA agreements",
+              "On-premise deployment option",
+            ],
+            description: "For large organizations with specific requirements",
+            buttonText: "Contact Sales",
+            href: "/contact",
+            isPopular: false,
+          },
+        ]}
+      />
 
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">

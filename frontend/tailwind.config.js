@@ -2,6 +2,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
+      maxWidth: {
+        container: "1280px",
+      },
       colors: {
         black: "#000000",
         gray: {
@@ -28,6 +31,7 @@ export default {
         'glow': 'glow 2s ease-in-out infinite alternate',
         'border-glow': 'border-glow 3s ease-in-out infinite',
         'spin-slow': 'spin 3s linear infinite',
+        'marquee': 'marquee var(--duration) linear infinite',
       },
       keyframes: {
         glow: {
@@ -48,6 +52,10 @@ export default {
             boxShadow: '0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.2)',
           },
         },
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(calc(-100% - var(--gap)))' }
+        }
       },
     },
   },
