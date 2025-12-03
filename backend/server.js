@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5000
 
 //CORS TO CONNECT FRONTEND AND BACKEND
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
     credentials: true
 }))
 app.use(express.json({limit: '100mb'}))
@@ -28,17 +28,15 @@ import uploadRoutes from './routes/uploadRoutes.js'
 import refactorRoutes from './routes/refactorRoutes.js'
 import diffRoutes from './routes/diffRoutes.js'
 import githubRoutes from './routes/githubRoutes.js'
+import workflowRoutes from './routes/ai-workflow.js'
+import reviewRoutes from './routes/reviewRoutes.js'
+import oauthRoutes from './routes/oauthRoutes.js'
+import historyRoutes from './routes/historyRoutes.js'
 
 
 //backend checking
 app.get('/api/check', (req,res)=>{
     res.json({ status: 'ok', message: 'Backend Running'})
-})
-
-//ERROR HANDLING MIDDLEWARE
-app.use((err, req,res,next)=>{
-    console.error(err)
-    res.status(500).json({error: 'Internal Server Error'})
 })
 
 //ROUTES
@@ -48,6 +46,16 @@ app.use('/api/upload', uploadRoutes)
 app.use('/api/refactor', refactorRoutes)
 app.use('/api/diffs', diffRoutes)
 app.use('/api/github', githubRoutes)
+app.use('/api/workflow', workflowRoutes)
+app.use('/api/review', reviewRoutes)
+app.use('/api/oauth', oauthRoutes)
+app.use('/api/history', historyRoutes)
+
+//ERROR HANDLING MIDDLEWARE (must be LAST)
+app.use((err, req,res,next)=>{
+    console.error(err)
+    res.status(500).json({error: 'Internal Server Error'})
+})
 
 
 app.listen(PORT, ()=>{

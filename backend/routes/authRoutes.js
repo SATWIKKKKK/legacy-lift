@@ -65,7 +65,7 @@ router.post('/login', async(req,res,next)=>{
            const users = await createUserModel(db)
 
 
-            const user = await users.findOne({ email })
+           const user = await users.findOne({ email })
     if (!user || !verifyPassword(password, user.password)) {
       return res.status(401).json({ error: 'Invalid credentials' })
     }
@@ -117,3 +117,5 @@ router.post('/login', async(req,res,next)=>{
     res.status(500).json({ error: 'Failed to get user' })
   }
 })
+
+export default router
