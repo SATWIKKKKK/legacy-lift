@@ -32,7 +32,7 @@ import githubRoutes from './routes/githubRoutes.js'
 
 //backend checking
 app.get('/api/check', (req,res)=>{
-    res.json({ status : ok, message: 'Backend Running'})
+    res.json({ status: 'ok', message: 'Backend Running'})
 })
 
 //ERROR HANDLING MIDDLEWARE
