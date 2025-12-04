@@ -12,29 +12,34 @@ import WebGLDemo from "./pages/WebGLDemo"
 import WebGLTest from "./pages/WebGLTest"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
+import ProtectedRoute from "./components/ProtectedRoute"
 import "./App.css"
 
 function AppContent() {
   const location = useLocation()
   const isWebGLPage = location.pathname === "/webgl" || location.pathname === "/webgl-test"
+  const isLoginPage = location.pathname === "/login"
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {!isWebGLPage && <Header />}
+      {!isWebGLPage && !isLoginPage && <Header />}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/projects" element={<Dashboard />} />
-        <Route path="/upload" element={<Upload />} />
-        <Route path="/demo" element={<GlowingDemo />} />
-        <Route path="/webgl" element={<WebGLDemo />} />
-        <Route path="/webgl-test" element={<WebGLTest />} />
-        <Route path="/project/:projectId" element={<ProjectDetail />} />
-        <Route path="/project/:projectId/version/:versionId" element={<DiffViewer />} />
         <Route path="/login" element={<Login setIsAuthenticated={() => {}} />} />
-        <Route path="*" element={<Navigate to="/" />} />
+        
+        {/* Protected Routes */}
+        <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/projects" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/upload" element={<ProtectedRoute><Upload /></ProtectedRoute>} />
+        <Route path="/demo" element={<ProtectedRoute><GlowingDemo /></ProtectedRoute>} />
+        <Route path="/webgl" element={<ProtectedRoute><WebGLDemo /></ProtectedRoute>} />
+        <Route path="/webgl-test" element={<ProtectedRoute><WebGLTest /></ProtectedRoute>} />
+        <Route path="/project/:projectId" element={<ProtectedRoute><ProjectDetail /></ProtectedRoute>} />
+        <Route path="/project/:projectId/version/:versionId" element={<ProtectedRoute><DiffViewer /></ProtectedRoute>} />
+        
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
-      {!isWebGLPage && <Footer />}
+      {!isWebGLPage && !isLoginPage && <Footer />}
     </div>
   )
 }

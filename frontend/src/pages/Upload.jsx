@@ -48,20 +48,35 @@ export default function Upload() {
       const formData = new FormData();
       formData.append("projectName", projectName);
       formData.append("description", description);
+      
+      // Append all files
       files.forEach(file => formData.append("files", file));
+      
+      // Get token from localStorage
+      const token = localStorage.getItem('token');
+      
       const res = await fetch("/api/upload", {
         method: "POST",
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
         body: formData,
       });
+      
+      const data = await res.json();
+      
       if (res.ok) {
         setMessage("success: Upload complete!");
         // Navigate to dashboard or project detail after success
-        navigate("/dashboard");
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 1000);
       } else {
-        setMessage("error: Upload failed");
+        setMessage(`error: ${data.error || 'Upload failed'}`);
       }
-    } catch {
-      setMessage("error: Network error");
+    } catch (error) {
+      console.error('Upload error:', error);
+      setMessage("error: Network error - " + error.message);
     }
     setLoading(false);
   };

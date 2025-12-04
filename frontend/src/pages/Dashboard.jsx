@@ -14,7 +14,7 @@ export default function Dashboard() {
     const fetchProjects = async () => {
       try {
         const response = await apiClient.get("/projects")
-        setProjects(response.data)
+        setProjects(response.data.projects || [])
       } catch (error) {
         console.error("Error fetching projects:", error)
       } finally {
@@ -26,7 +26,7 @@ export default function Dashboard() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-8">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black pt-20 p-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-12">
           <div>
