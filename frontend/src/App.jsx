@@ -10,8 +10,10 @@ import Login from "./pages/Login"
 import GlowingDemo from "./pages/GlowingDemo"
 import WebGLDemo from "./pages/WebGLDemo"
 import WebGLTest from "./pages/WebGLTest"
+import AIChatDemo from "./pages/AIChatDemo"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
+import FloatingAIButton from "./components/FloatingAIButton"
 import ProtectedRoute from "./components/ProtectedRoute"
 import "./App.css"
 
@@ -19,10 +21,12 @@ function AppContent() {
   const location = useLocation()
   const isWebGLPage = location.pathname === "/webgl" || location.pathname === "/webgl-test"
   const isLoginPage = location.pathname === "/login"
+  const isAIChatPage = location.pathname === "/ai-chat"
+  const showFloatingButton = !isLoginPage && !isAIChatPage && !isWebGLPage
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {!isWebGLPage && !isLoginPage && <Header />}
+      {!isWebGLPage && !isLoginPage && !isAIChatPage && <Header />}
       <Routes>
         <Route path="/login" element={<Login setIsAuthenticated={() => {}} />} />
         
@@ -30,7 +34,8 @@ function AppContent() {
         <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/projects" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-        <Route path="/upload" element={<ProtectedRoute><Upload /></ProtectedRoute>} />
+        <Route path="/upload" element={<Navigate to="/ai-chat" replace />} />
+        <Route path="/ai-chat" element={<ProtectedRoute><AIChatDemo /></ProtectedRoute>} />
         <Route path="/demo" element={<ProtectedRoute><GlowingDemo /></ProtectedRoute>} />
         <Route path="/webgl" element={<ProtectedRoute><WebGLDemo /></ProtectedRoute>} />
         <Route path="/webgl-test" element={<ProtectedRoute><WebGLTest /></ProtectedRoute>} />
@@ -39,7 +44,8 @@ function AppContent() {
         
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
-      {!isWebGLPage && !isLoginPage && <Footer />}
+      {!isWebGLPage && !isLoginPage && !isAIChatPage && <Footer />}
+      {showFloatingButton && <FloatingAIButton />}
     </div>
   )
 }

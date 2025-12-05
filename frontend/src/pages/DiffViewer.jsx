@@ -48,7 +48,7 @@ export default function DiffViewer() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-8 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-600"></div>
       </div>
     )
   }
@@ -60,7 +60,7 @@ export default function DiffViewer() {
           <p className="text-gray-400 mb-4">Version not found</p>
           <button
             onClick={() => navigate(`/project/${projectId}`)}
-            className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg"
+            className="px-6 py-2 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 hover:from-red-600 hover:via-yellow-600 hover:to-green-600 text-white rounded-lg transition-all"
           >
             Back to Project
           </button>
@@ -97,7 +97,7 @@ export default function DiffViewer() {
                     onClick={() => setCurrentFileIndex(idx)}
                     className={`w-full text-left px-3 py-2 rounded-lg transition ${
                       idx === currentFileIndex
-                        ? "bg-purple-600 text-white"
+                        ? "bg-cyan-600 text-white"
                         : "bg-gray-700 text-gray-300 hover:bg-gray-600"
                     }`}
                   >

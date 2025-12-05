@@ -56,7 +56,7 @@ export default function Login({ setIsAuthenticated }) {
     <div className="min-h-screen bg-black text-white flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
@@ -64,17 +64,17 @@ export default function Login({ setIsAuthenticated }) {
         {/* Left side - Branding */}
         <div className="hidden lg:flex flex-1 flex-col space-y-6">
           <div className="flex items-center space-x-3">
-            <div className="p-3 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl">
+            <div className="p-3 bg-gradient-to-br from-red-500 via-yellow-500 to-cyan-500 rounded-xl">
               <Code2 className="w-8 h-8" />
             </div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 to-cyan-500 bg-clip-text text-transparent">
               LegacyLift
             </h1>
           </div>
           
           <h2 className="text-5xl font-bold leading-tight">
             Transform Your Legacy Code with{" "}
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-cyan-500 to-blue-500 bg-clip-text text-transparent">
               AI Power
             </span>
           </h2>
@@ -85,8 +85,8 @@ export default function Login({ setIsAuthenticated }) {
 
           <div className="space-y-4 pt-4">
             <div className="flex items-start space-x-3">
-              <div className="p-2 bg-purple-500/20 rounded-lg mt-1">
-                <Sparkles className="w-5 h-5 text-purple-400" />
+              <div className="p-2 bg-cyan-500/20 rounded-lg mt-1">>
+                <Sparkles className="w-5 h-5 text-cyan-400" />
               </div>
               <div>
                 <h3 className="font-semibold text-lg">AI-Powered Refactoring</h3>
@@ -105,8 +105,8 @@ export default function Login({ setIsAuthenticated }) {
             </div>
 
             <div className="flex items-start space-x-3">
-              <div className="p-2 bg-pink-500/20 rounded-lg mt-1">
-                <Zap className="w-5 h-5 text-pink-400" />
+              <div className="p-2 bg-cyan-500/20 rounded-lg mt-1">
+                <Zap className="w-5 h-5 text-cyan-400" />
               </div>
               <div>
                 <h3 className="font-semibold text-lg">Instant Results</h3>
@@ -121,10 +121,10 @@ export default function Login({ setIsAuthenticated }) {
           <div className="bg-gray-900/80 backdrop-blur-xl rounded-2xl border border-gray-800 shadow-2xl p-8">
             {/* Mobile branding */}
             <div className="lg:hidden flex items-center justify-center space-x-3 mb-6">
-              <div className="p-2 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg">
+              <div className="p-2 bg-gradient-to-br from-red-500 via-yellow-500 to-cyan-500 rounded-lg">
                 <Code2 className="w-6 h-6" />
               </div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 to-cyan-500 bg-clip-text text-transparent">
                 LegacyLift
               </h1>
             </div>
@@ -152,7 +152,7 @@ export default function Login({ setIsAuthenticated }) {
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full pl-11 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition"
+                      className="w-full pl-11 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition"
                       placeholder="John Doe"
                     />
                   </div>
@@ -169,7 +169,7 @@ export default function Login({ setIsAuthenticated }) {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition"
+                    className="w-full pl-11 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition"
                     placeholder="you@example.com"
                     required
                   />
@@ -186,7 +186,7 @@ export default function Login({ setIsAuthenticated }) {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition"
+                    className="w-full pl-11 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition"
                     placeholder="••••••••"
                     required
                     minLength={6}
@@ -214,7 +214,7 @@ export default function Login({ setIsAuthenticated }) {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2 group"
+                className="w-full py-3 bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 to-cyan-500 hover:from-red-600 hover:via-yellow-600 hover:via-green-600 hover:to-cyan-600 rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2 group"
               >
                 <span>{loading ? "Please wait..." : isSignUp ? "Create Account" : "Sign In"}</span>
                 {!loading && (
@@ -230,7 +230,7 @@ export default function Login({ setIsAuthenticated }) {
                   setError("")
                   setSuccess("")
                 }} 
-                className="text-purple-400 hover:text-purple-300 text-sm font-medium transition"
+                className="text-cyan-400 hover:text-cyan-300 text-sm font-medium transition"
               >
                 {isSignUp 
                   ? "Already have an account? Sign in" 

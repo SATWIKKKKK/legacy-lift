@@ -117,7 +117,7 @@ export default function Header() {
               ) : (
                 <Link
                   to="/login"
-                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-lg transition-colors text-white font-medium"
+                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 to-cyan-500 hover:from-red-600 hover:via-yellow-600 hover:via-green-600 hover:to-cyan-600 rounded-lg transition-all text-white font-medium"
                 >
                   <LogIn className="w-4 h-4" />
                   <span>Sign In</span>
@@ -199,7 +199,7 @@ export default function Header() {
             <Link
               to="/login"
               onClick={() => setSidebarOpen(false)}
-              className="block px-4 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white transition-colors text-center font-medium"
+              className="block px-4 py-3 rounded-lg bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 to-cyan-500 hover:from-red-600 hover:via-yellow-600 hover:via-green-600 hover:to-cyan-600 text-white transition-all text-center font-medium"
             >
               Sign In
             </Link>

@@ -15,9 +15,12 @@ export default function ProjectDetail() {
   useEffect(() => {
     const fetchProject = async () => {
       try {
+        console.log('Fetching project:', projectId)
         const response = await apiClient.get(`/projects/${projectId}`)
-        setProject(response.data)
+        console.log('Project response:', response.data)
+        setProject(response.data.project)
       } catch (err) {
+        console.error('Failed to load project:', err)
         setError("Failed to load project")
       } finally {
         setLoading(false)
@@ -32,16 +35,19 @@ export default function ProjectDetail() {
     setError("")
 
     try {
-      const files = project.uploadedFiles.map((file) => ({
-        filename: file.originalName,
-        content: `// Sample code from ${file.originalName}`,
+      const files = project.files.map((file) => ({
+        filename: file.filename,
+        content: file.content,
       }))
 
+      console.log('Starting refactor with files:', files.length)
       const response = await apiClient.post(`/refactor/${projectId}/refactor`, { files })
+      console.log('Refactor response:', response.data)
 
       setProject(response.data.project)
       navigate(`/project/${projectId}/version/${response.data.version._id}`)
     } catch (err) {
+      console.error('Refactor error:', err)
       setError(err.response?.data?.error || "Refactoring failed")
     } finally {
       setRefactoring(false)
@@ -51,7 +57,7 @@ export default function ProjectDetail() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-8 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-600"></div>
       </div>
     )
   }
@@ -70,12 +76,16 @@ export default function ProjectDetail() {
           <div className="mb-8">
             <h2 className="text-xl font-semibold text-white mb-4">Uploaded Files</h2>
             <div className="space-y-2">
-              {project?.uploadedFiles.map((file, idx) => (
-                <div key={idx} className="flex items-center justify-between bg-gray-700 p-3 rounded-lg">
-                  <span className="text-gray-300">{file.originalName}</span>
-                  <span className="text-gray-500 text-sm">{(file.size / 1024).toFixed(2)} KB</span>
-                </div>
-              ))}
+              {project?.files && project.files.length > 0 ? (
+                project.files.map((file, idx) => (
+                  <div key={idx} className="flex items-center justify-between bg-gray-700 p-3 rounded-lg">
+                    <span className="text-gray-300">{file.filename}</span>
+                    <span className="text-gray-500 text-sm">{file.size ? (file.size / 1024).toFixed(2) : '0.00'} KB</span>
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-500">No files uploaded yet</p>
+              )}
             </div>
           </div>
 
@@ -86,7 +96,7 @@ export default function ProjectDetail() {
           <button
             onClick={handleRefactor}
             disabled={refactoring}
-            className="w-full px-6 py-3 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 text-white rounded-lg font-semibold transition"
+            className="w-full px-6 py-3 bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 to-cyan-500 hover:from-red-600 hover:via-yellow-600 hover:via-green-600 hover:to-cyan-600 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg font-semibold transition-all"
           >
             {refactoring ? "Refactoring with AI..." : "Start AI Refactoring"}
           </button>

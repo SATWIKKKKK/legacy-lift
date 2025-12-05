@@ -42,6 +42,13 @@ export default function Upload() {
       setMessage("error: Project name and files required");
       return;
     }
+    
+    console.log('Starting upload...');
+    console.log('Project Name:', projectName);
+    console.log('Description:', description);
+    console.log('Files to upload:', files.length);
+    console.log('Files:', files.map(f => ({ name: f.name, size: f.size, type: f.type })));
+    
     setLoading(true);
     setMessage("");
     try {
@@ -50,11 +57,16 @@ export default function Upload() {
       formData.append("description", description);
       
       // Append all files
-      files.forEach(file => formData.append("files", file));
+      files.forEach((file, index) => {
+        console.log(`Appending file ${index}:`, file.name);
+        formData.append("files", file);
+      });
       
       // Get token from localStorage
       const token = localStorage.getItem('token');
+      console.log('Token exists:', !!token);
       
+      console.log('Sending request to /api/upload...');
       const res = await fetch("/api/upload", {
         method: "POST",
         headers: {
@@ -63,11 +75,12 @@ export default function Upload() {
         body: formData,
       });
       
+      console.log('Response status:', res.status);
       const data = await res.json();
+      console.log('Response data:', data);
       
       if (res.ok) {
         setMessage("success: Upload complete!");
-        // Navigate to dashboard or project detail after success
         setTimeout(() => {
           navigate("/dashboard");
         }, 1000);

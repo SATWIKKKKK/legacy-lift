@@ -74,7 +74,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-// GET /api/projects/:id - Get single project
+// GET /api/projects/:id - Get single project with uploaded files
 router.get('/:id', async (req, res) => {
   try {
     const token = extractTokenFromHeader(req.headers.authorization)
@@ -92,7 +92,29 @@ router.get('/:id', async (req, res) => {
       return res.status(404).json({ error: 'Project not found' })
     }
 
-    res.json({ project })
+    // Fetch uploaded files for this project
+    const uploadedFiles = await db.collection('uploads')
+      .find({ 
+        projectId: req.params.id,
+        userId: decoded.userId 
+      })
+      .toArray()
+
+    // Format response with files included
+    const response = {
+      ...project,
+      id: project._id.toString(),
+      files: uploadedFiles.map(file => ({
+        id: file._id.toString(),
+        filename: file.filename,
+        language: file.language,
+        size: file.size,
+        content: file.content,
+        path: file.path || file.filename
+      }))
+    }
+
+    res.json({ project: response })
   } catch (error) {
     console.error('Get project error:', error)
     res.status(500).json({ error: 'Failed to get project' })
