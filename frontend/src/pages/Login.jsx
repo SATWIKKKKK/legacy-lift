@@ -85,7 +85,7 @@ export default function Login({ setIsAuthenticated }) {
 
           <div className="space-y-4 pt-4">
             <div className="flex items-start space-x-3">
-              <div className="p-2 bg-cyan-500/20 rounded-lg mt-1">>
+              <div className="p-2 bg-cyan-500/20 rounded-lg mt-1">
                 <Sparkles className="w-5 h-5 text-cyan-400" />
               </div>
               <div>

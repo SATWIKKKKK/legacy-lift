@@ -10,10 +10,10 @@ import confetti from "canvas-confetti"
 import NumberFlow from "@number-flow/react"
 import { WebGLShaderSection } from "./web-gl-shader-section"
 
-export function Pricing({
+export  function Pricing({
   plans,
   title = "Simple, Transparent Pricing",
-  description = "Choose the plan that works for you\nAll plans include access to our platform, lead generation tools, and dedicated support.",
+  description = "Choose the plan that works for you.All plans include access to our platform, lead generation tools, and dedicated support.",
 }) {
   const [isMonthly, setIsMonthly] = useState(true)
   const isDesktop = useMediaQuery("(min-width: 768px)")

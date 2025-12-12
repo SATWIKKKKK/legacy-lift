@@ -96,37 +96,37 @@ export function AnimatedAIChat() {
 
     const commandSuggestions = [
         { 
-            icon: <Code2 className="w-4 h-4" />, 
+            icon: <Code2 className="w-4 h-4 text-blue-400" />, 
             label: "Refactor Code", 
             description: "AI-powered code refactoring", 
             prefix: "/refactor" 
         },
         { 
-            icon: <Bug className="w-4 h-4" />, 
+            icon: <Bug className="w-4 h-4 text-red-400" />, 
             label: "Find Bugs", 
             description: "Detect code issues and bugs", 
             prefix: "/bugs" 
         },
         { 
-            icon: <Sparkles className="w-4 h-4" />, 
+            icon: <Sparkles className="w-4 h-4 text-yellow-400" />, 
             label: "Optimize", 
             description: "Performance optimization", 
             prefix: "/optimize" 
         },
         { 
-            icon: <GitBranch className="w-4 h-4" />, 
+            icon: <GitBranch className="w-4 h-4 text-green-400" />, 
             label: "Create PR", 
             description: "Generate pull request", 
             prefix: "/pr" 
         },
         { 
-            icon: <Wand2 className="w-4 h-4" />, 
+            icon: <Wand2 className="w-4 h-4 text-purple-400" />, 
             label: "Modernize", 
             description: "Update legacy patterns", 
             prefix: "/modernize" 
         },
         { 
-            icon: <FileCode className="w-4 h-4" />, 
+            icon: <FileCode className="w-4 h-4 text-cyan-400" />, 
             label: "Document", 
             description: "Generate documentation", 
             prefix: "/docs" 
@@ -472,10 +472,10 @@ export function AnimatedAIChat() {
 
     return (
         <div className="min-h-screen flex flex-col w-full items-center justify-center bg-transparent text-white p-4 sm:p-6 md:p-8 relative overflow-hidden">
-            <div className="absolute inset-0 w-full h-full overflow-hidden">
-                <div className="absolute top-0 left-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-purple-500/10 rounded-full mix-blend-normal filter blur-[128px] animate-pulse" />
-                <div className="absolute bottom-0 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-pink-500/10 rounded-full mix-blend-normal filter blur-[128px] animate-pulse delay-700" />
-                <div className="absolute top-1/4 right-1/3 w-48 sm:w-64 h-48 sm:h-64 bg-violet-500/10 rounded-full mix-blend-normal filter blur-[96px] animate-pulse delay-1000" />
+            <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[500px] h-[400px] sm:h-[500px] bg-white/[0.03] rounded-full filter blur-[120px] animate-pulse" />
+                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-48 sm:w-64 h-48 sm:h-64 bg-white/[0.02] rounded-full filter blur-[100px] animate-pulse delay-500" />
+                <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-40 sm:w-56 h-40 sm:h-56 bg-white/[0.02] rounded-full filter blur-[80px] animate-pulse delay-1000" />
             </div>
             
             <div className="w-full max-w-2xl mx-auto relative">
@@ -493,7 +493,7 @@ export function AnimatedAIChat() {
                             className="inline-block"
                         >
                             <div className="flex items-center justify-center gap-3 mb-3">
-                                <div className="p-2 sm:p-3 bg-gradient-to-br from-purple-800 to-purple-600 rounded-xl">
+                                <div className="p-2 sm:p-3 bg-white/10 border border-white/20 rounded-xl">
                                     <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                                 </div>
                             </div>
@@ -501,7 +501,7 @@ export function AnimatedAIChat() {
                                 Transform Your Legacy Code
                             </h1>
                             <motion.div 
-                                className="h-px bg-gradient-to-r from-transparent via-purple-400/40 to-transparent"
+                                className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
                                 initial={{ width: 0, opacity: 0 }}
                                 animate={{ width: "100%", opacity: 1 }}
                                 transition={{ delay: 0.5, duration: 0.8 }}
@@ -520,7 +520,7 @@ export function AnimatedAIChat() {
                         {!showUploadForm && (
                             <motion.button
                                 onClick={() => setShowUploadForm(true)}
-                                className="mt-4 px-6 py-2.5 bg-gradient-to-r from-purple-800 to-purple-600 hover:from-purple-700 hover:to-pink-900 text-white rounded-lg font-medium transition-all duration-300 hover:scale-105 inline-flex items-center gap-2 text-sm"
+                                className="mt-4 px-6 py-2.5 bg-white text-black hover:bg-gray-200 rounded-lg font-medium transition-all duration-300 hover:scale-105 inline-flex items-center gap-2 text-sm"
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4 }}
@@ -540,11 +540,11 @@ export function AnimatedAIChat() {
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: "auto" }}
                                 exit={{ opacity: 0, height: 0 }}
-                                className="backdrop-blur-2xl bg-white/[0.02] rounded-xl sm:rounded-2xl border border-purple-500/20 shadow-2xl mx-4 sm:mx-0 p-4 sm:p-6"
+                                className="backdrop-blur-2xl bg-white/[0.02] rounded-xl sm:rounded-2xl border border-white/10 shadow-2xl mx-4 sm:mx-0 p-4 sm:p-6"
                             >
                                 <div className="flex items-center justify-between mb-4">
                                     <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                                        <Sparkles className="w-5 h-5 text-purple-400" />
+                                        <Sparkles className="w-5 h-5 text-white/70" />
                                         Upload Project
                                     </h3>
                                     <button
@@ -562,7 +562,7 @@ export function AnimatedAIChat() {
                                             placeholder="Project Name *"
                                             value={projectName}
                                             onChange={(e) => setProjectName(e.target.value)}
-                                            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:outline-none focus:border-purple-500/50 transition-colors"
+                                            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 transition-colors"
                                         />
                                     </div>
                                     
@@ -572,15 +572,15 @@ export function AnimatedAIChat() {
                                             value={description}
                                             onChange={(e) => setDescription(e.target.value)}
                                             rows={2}
-                                            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:outline-none focus:border-purple-500/50 transition-colors resize-none"
+                                            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 transition-colors resize-none"
                                         />
                                     </div>
                                     
                                     {uploadedFiles.length > 0 && (
                                         <div className="flex flex-wrap gap-2">
                                             {uploadedFiles.map((file, index) => (
-                                                <div key={index} className="flex items-center gap-2 bg-purple-500/10 border border-purple-500/20 px-3 py-1.5 rounded-lg text-xs text-white/70">
-                                                    <FileCode className="w-3 h-3 text-purple-400" />
+                                                <div key={index} className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg text-xs text-white/70">
+                                                    <FileCode className="w-3 h-3 text-white/60" />
                                                     <span className="truncate max-w-[150px]">{file.name}</span>
                                                     <button
                                                         onClick={() => {
@@ -612,7 +612,7 @@ export function AnimatedAIChat() {
                                             "w-full px-4 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2",
                                             uploadLoading || !projectName || uploadedFiles.length === 0
                                                 ? "bg-white/5 text-white/40 cursor-not-allowed"
-                                                : "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg hover:shadow-purple-500/50"
+                                                : "bg-white text-black hover:bg-gray-200 shadow-lg"
                                         )}
                                     >
                                         {uploadLoading ? (
@@ -656,7 +656,7 @@ export function AnimatedAIChat() {
                                     const project = projects.find(p => (p._id || p.id) === e.target.value);
                                     setSelectedProject(project);
                                 }}
-                                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-purple-500/50 transition-colors"
+                                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-white/30 transition-colors"
                             >
                                 {projects.map(project => {
                                     const projectId = project._id || project.id;
@@ -691,7 +691,7 @@ export function AnimatedAIChat() {
                                         <div className={cn(
                                             "max-w-[80%] px-4 py-2 rounded-lg text-sm whitespace-pre-wrap",
                                             msg.role === 'user'
-                                                ? "bg-purple-600/20 text-white border border-purple-500/30"
+                                                ? "bg-white/10 text-white border border-white/20"
                                                 : "bg-white/5 text-white/90 border border-white/10"
                                         )}>
                                             {msg.content}
@@ -726,7 +726,7 @@ export function AnimatedAIChat() {
                             {showCommandPalette && (
                                 <motion.div 
                                     ref={commandPaletteRef}
-                                    className="absolute left-2 right-2 sm:left-4 sm:right-4 bottom-full mb-2 backdrop-blur-xl bg-black/90 rounded-lg z-50 shadow-lg border border-purple-500/20 overflow-hidden max-h-[60vh] overflow-y-auto"
+                                    className="absolute left-2 right-2 sm:left-4 sm:right-4 bottom-full mb-2 backdrop-blur-xl bg-black/90 rounded-lg z-50 shadow-lg border border-white/10 overflow-hidden max-h-[60vh] overflow-y-auto"
                                     initial={{ opacity: 0, y: 5 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: 5 }}
@@ -737,9 +737,9 @@ export function AnimatedAIChat() {
                                             const iconColors = [
                                                 'text-blue-400',    // Refactor
                                                 'text-red-400',     // Find Bugs
-                                                'text-purple-400',  // Optimize
+                                                'text-yellow-400',  // Optimize
                                                 'text-green-400',   // Create PR
-                                                'text-yellow-400',  // Modernize
+                                                'text-purple-400',  // Modernize
                                                 'text-cyan-400'     // Document
                                             ];
                                             
@@ -749,7 +749,7 @@ export function AnimatedAIChat() {
                                                     className={cn(
                                                         "flex items-center gap-2 px-3 py-2.5 text-xs transition-colors cursor-pointer",
                                                         activeSuggestion === index 
-                                                            ? "bg-purple-600/20 text-white border-l-2 border-purple-500" 
+                                                            ? "bg-white/10 text-white border-l-2 border-white" 
                                                             : "text-white/70 hover:bg-white/5"
                                                     )}
                                                     onClick={() => selectCommandSuggestion(index)}
@@ -812,12 +812,12 @@ export function AnimatedAIChat() {
                                     {attachments.map((file, index) => (
                                         <motion.div
                                             key={index}
-                                            className="flex items-center gap-2 text-xs bg-purple-500/10 py-1.5 px-3 rounded-lg text-white/70 border border-purple-500/20"
+                                            className="flex items-center gap-2 text-xs bg-white/5 py-1.5 px-3 rounded-lg text-white/70 border border-white/10"
                                             initial={{ opacity: 0, scale: 0.9 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             exit={{ opacity: 0, scale: 0.9 }}
                                         >
-                                            <FileCode className="w-3 h-3 text-purple-400" />
+                                            <FileCode className="w-3 h-3 text-white/60" />
                                             <span className="truncate max-w-[150px]">{file}</span>
                                             <button 
                                                 onClick={() => removeAttachment(index)}
@@ -855,7 +855,7 @@ export function AnimatedAIChat() {
                                     whileTap={{ scale: 0.94 }}
                                     className={cn(
                                         "p-2 text-white/40 hover:text-white/90 rounded-lg transition-colors relative group",
-                                        showCommandPalette && "bg-purple-600/20 text-white/90"
+                                        showCommandPalette && "bg-white/10 text-white/90"
                                     )}
                                 >
                                     <Command className="w-4 h-4" />
@@ -876,7 +876,7 @@ export function AnimatedAIChat() {
                                     "px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all",
                                     "flex items-center gap-2",
                                     value.trim()
-                                        ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/20"
+                                        ? "bg-white text-black shadow-lg"
                                         : "bg-white/[0.05] text-white/40"
                                 )}
                             >
@@ -892,35 +892,16 @@ export function AnimatedAIChat() {
 
                     <div className="flex flex-wrap items-center justify-center gap-2 px-4">
                         {commandSuggestions.slice(0, 4).map((suggestion, index) => {
-                            const iconColors = [
-                                'text-blue-400',    // Refactor - blue
-                                'text-red-400',     // Find Bugs - red
-                                'text-purple-400',  // Optimize - purple
-                                'text-green-400'    // Create PR - green
-                            ];
-                            const borderColors = [
-                                'hover:border-blue-500/30',
-                                'hover:border-red-500/30',
-                                'hover:border-purple-500/30',
-                                'hover:border-green-500/30'
-                            ];
-                            const bgColors = [
-                                'hover:bg-blue-600/10',
-                                'hover:bg-red-600/10',
-                                'hover:bg-purple-600/10',
-                                'hover:bg-green-600/10'
-                            ];
-                            
                             return (
                                 <motion.button
                                     key={suggestion.prefix}
                                     onClick={() => selectCommandSuggestion(index)}
-                                    className={`flex items-center gap-2 px-3 py-2 bg-white/[0.02] ${bgColors[index]} rounded-lg text-xs sm:text-sm text-white/60 hover:text-white/90 transition-all relative group border border-white/5 ${borderColors[index]}`}
+                                    className="flex items-center gap-2 px-3 py-2 bg-white/[0.02] hover:bg-white/10 rounded-lg text-xs sm:text-sm text-white/60 hover:text-white/90 transition-all relative group border border-white/5 hover:border-white/20"
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.1 }}
                                 >
-                                    <div className={iconColors[index]}>
+                                    <div className="text-white/70">
                                         {suggestion.icon}
                                     </div>
                                     <span className="hidden sm:inline">{suggestion.label}</span>
@@ -935,13 +916,13 @@ export function AnimatedAIChat() {
             <AnimatePresence>
                 {isTyping && (
                     <motion.div 
-                        className="fixed bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 backdrop-blur-2xl bg-gradient-to-r from-purple-900/40 to-pink-900/40 rounded-full px-4 py-2 shadow-lg border border-purple-500/20"
+                        className="fixed bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 backdrop-blur-2xl bg-black/60 rounded-full px-4 py-2 shadow-lg border border-white/10"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 20 }}
                     >
                         <div className="flex items-center gap-3">
-                            <div className="w-7 h-7 sm:w-8 sm:h-7 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
+                            <div className="w-7 h-7 sm:w-8 sm:h-7 rounded-full bg-white/10 flex items-center justify-center">
                                 <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                             </div>
                             <div className="flex items-center gap-2 text-xs sm:text-sm text-white/90">
@@ -955,7 +936,7 @@ export function AnimatedAIChat() {
 
             {inputFocused && (
                 <motion.div 
-                    className="fixed w-[30rem] h-[30rem] sm:w-[50rem] sm:h-[50rem] rounded-full pointer-events-none z-0 opacity-[0.02] bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 blur-[96px]"
+                    className="fixed w-[30rem] h-[30rem] sm:w-[50rem] sm:h-[50rem] rounded-full pointer-events-none z-0 opacity-[0.02] bg-white blur-[96px]"
                     animate={{
                         x: mousePosition.x - 400,
                         y: mousePosition.y - 400,
@@ -982,7 +963,7 @@ function FileViewer({ file }) {
                 className="w-full px-4 py-3 flex items-center justify-between hover:bg-white/5 transition-colors"
             >
                 <div className="flex items-center gap-3">
-                    <FileCode className="w-4 h-4 text-purple-400" />
+                    <FileCode className="w-4 h-4 text-white/70" />
                     <span className="text-sm text-white font-medium">{file.filename}</span>
                     <span className="text-xs text-white/40">
                         {file.language || 'text'}
@@ -1025,7 +1006,7 @@ function TypingDots() {
             {[1, 2, 3].map((dot) => (
                 <motion.div
                     key={dot}
-                    className="w-1.5 h-1.5 bg-purple-400 rounded-full mx-0.5"
+                    className="w-1.5 h-1.5 bg-white/70 rounded-full mx-0.5"
                     initial={{ opacity: 0.3 }}
                     animate={{ 
                         opacity: [0.3, 0.9, 0.3],
@@ -1038,7 +1019,7 @@ function TypingDots() {
                         ease: "easeInOut",
                     }}
                     style={{
-                        boxShadow: "0 0 4px rgba(168, 85, 247, 0.5)"
+                        boxShadow: "0 0 4px rgba(255, 255, 255, 0.3)"
                     }}
                 />
             ))}
